@@ -1,0 +1,6 @@
+@RS.FleetAdmin.Station.API_HostAddress = http://localhost:5102
+
+GET {{RS.FleetAdmin.Station.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
