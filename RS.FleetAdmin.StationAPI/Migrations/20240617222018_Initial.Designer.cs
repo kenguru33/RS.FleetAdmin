@@ -11,9 +11,9 @@ using RS.FleetAdmin.StationAPI.DATA;
 
 namespace RS.FleetAdmin.StationAPI.Migrations
 {
-    [DbContext(typeof(StationDbContext))]
-    [Migration("20240616212929_Outbox")]
-    partial class Outbox
+    [DbContext(typeof(ApplicationDbContext))]
+    [Migration("20240617222018_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
