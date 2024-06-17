@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace RS.FleetAdmin.StationAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class Outbox : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -83,6 +83,18 @@ namespace RS.FleetAdmin.StationAPI.Migrations
                     table.PrimaryKey("PK_OutboxState", x => x.OutboxId);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Stations",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Stations", x => x.Id);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_InboxState_Delivered",
                 table: "InboxState",
@@ -127,6 +139,9 @@ namespace RS.FleetAdmin.StationAPI.Migrations
 
             migrationBuilder.DropTable(
                 name: "OutboxState");
+
+            migrationBuilder.DropTable(
+                name: "Stations");
         }
     }
 }

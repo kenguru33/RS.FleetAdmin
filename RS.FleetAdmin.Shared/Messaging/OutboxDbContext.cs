@@ -1,6 +1,6 @@
 ﻿namespace RS.FleetAdmin.Shared.Messaging;
 
-public class IMessagePublisher
+public class OutboxDbContext
 {
     
 }
