@@ -7,10 +7,12 @@ namespace RS.FleetAdmin.StationAPI.DATA;
 
 public class ApplicationDbContext : OutboxDbContext
 {
-    public ApplicationDbContext(DbContextOptions<OutboxDbContext> options) : base(options)
-    {
-    }
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
     
     public DbSet<Station> Stations { get; set; }
-    
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+    }
 }

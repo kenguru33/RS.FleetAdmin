@@ -1,6 +1,6 @@
-﻿namespace RS.FleetAdmin.Shared.Messaging.Station;
+﻿namespace RS.FleetAdmin.Shared.Messaging.Messages;
 
-public interface IStationCreated
+public class StationCreated
 {
     public string StationId { get; set; }
     public string Name { get; set; }

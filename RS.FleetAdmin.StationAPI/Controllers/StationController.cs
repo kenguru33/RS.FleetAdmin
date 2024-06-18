@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RS.FleetAdmin.Shared;
-using RS.FleetAdmin.Shared.Messaging.Station;
+using RS.FleetAdmin.Shared.Messaging.Messages;
 using RS.FleetAdmin.StationAPI.DATA;
 using RS.FleetAdmin.StationAPI.Entities;
 
@@ -10,7 +10,7 @@ namespace RS.FleetAdmin.StationAPI.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class StationController(StationDbContext dbContext, IPublishEndpoint publishEndpoint) : ControllerBase
+public class StationController(ApplicationDbContext dbContext, IPublishEndpoint publishEndpoint) : ControllerBase
 {
 
     [HttpGet]
@@ -28,7 +28,7 @@ public class StationController(StationDbContext dbContext, IPublishEndpoint publ
             Id = Guid.NewGuid(),
             Name = dto.Name
         });
-        await publishEndpoint.Publish<IStationCreated>(new { StationId = station.Entity.Id.ToString(), Name = station.Entity.Name  });
+        await publishEndpoint.Publish<StationCreated>(new { StationId = station.Entity.Id.ToString(), Name = station.Entity.Name  });
         await dbContext.SaveChangesAsync();
 
         return Ok();

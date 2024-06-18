@@ -38,10 +38,10 @@ builder.Services.AddMassTransit(busConfigurator =>
             rabbitConfig.Username("rabbitmq");
             rabbitConfig.Password("rabbitmq");
         });
-        config.ReceiveEndpoint("Vessel", e =>
-        {
-            e.ConfigureConsumer<StationCreatedConsumer>(context);
-        });
+        // config.ReceiveEndpoint("Vessel", e =>
+        // {
+        //     // e.ConfigureConsumer<StationCreatedConsumer>(context);
+        // });
         config.ConfigureEndpoints(context);
     });
 });
