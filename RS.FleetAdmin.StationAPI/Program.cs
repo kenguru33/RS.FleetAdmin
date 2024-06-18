@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Web;
+using RS.FleetAdmin.Shared.Messaging;
 using RS.FleetAdmin.StationAPI.DATA;
 using RS.FleetAdmin.StationAPI.Messaging.Consumers;
 
@@ -17,35 +18,39 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var configuration = builder.Configuration;
-builder.Services.AddDbContext<StationDbContext>(options =>
-    options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
+builder.Services.ConfigureApplicationDbContext<ApplicationDbContext>("Server=localhost;Port=5432;Database=StationDB;Username=postgres;Password=postgres");
 
-builder.Services.AddMassTransit(busConfigurator =>
-{
-    busConfigurator.AddEntityFrameworkOutbox<StationDbContext>(outboxConfig =>
-    {
-        outboxConfig.QueryDelay = TimeSpan.FromSeconds(10);
-        outboxConfig.UsePostgres();
-        outboxConfig.UseBusOutbox();
-    });
-    // busConfigurator.AddConsumer<StationCreatedHandler>();
-    busConfigurator.AddConsumersFromNamespaceContaining<StationCreatedConsumer>();
-    busConfigurator.SetEndpointNameFormatter(new KebabCaseEndpointNameFormatter("station", false));
-    busConfigurator.UsingRabbitMq((context, config) =>
-    {
-        config.Host("localhost", rabbitConfig =>
-        {
-            rabbitConfig.Username("rabbitmq");
-            rabbitConfig.Password("rabbitmq");
-        });
-        config.ReceiveEndpoint("Station", e =>
-        {
-            e.ConfigureConsumer<StationCreatedConsumer>(context);
-        });
-        config.ConfigureEndpoints(context);
-    });
-});
+builder.Services.ConfigureMassTransit<ApplicationDbContext>("StationService","localhost", "rabbitmq", "rabbitmq",typeof(StationCreatedConsumer) );
+
+// var configuration = builder.Configuration;
+// builder.Services.AddDbContext<StationDbContext>(options =>
+//     options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
+
+// builder.Services.AddMassTransit(busConfigurator =>
+// {
+//     busConfigurator.AddEntityFrameworkOutbox<StationDbContext>(outboxConfig =>
+//     {
+//         outboxConfig.QueryDelay = TimeSpan.FromSeconds(10);
+//         outboxConfig.UsePostgres();
+//         outboxConfig.UseBusOutbox();
+//     });
+//     // busConfigurator.AddConsumer<StationCreatedHandler>();
+//     busConfigurator.AddConsumersFromNamespaceContaining<StationCreatedConsumer>();
+//     busConfigurator.SetEndpointNameFormatter(new KebabCaseEndpointNameFormatter("station", false));
+//     busConfigurator.UsingRabbitMq((context, config) =>
+//     {
+//         config.Host("localhost", rabbitConfig =>
+//         {
+//             rabbitConfig.Username("rabbitmq");
+//             rabbitConfig.Password("rabbitmq");
+//         });
+//         config.ReceiveEndpoint("Station", e =>
+//         {
+//             e.ConfigureConsumer<StationCreatedConsumer>(context);
+//         });
+//         config.ConfigureEndpoints(context);
+//     });
+// });
 
 var app = builder.Build();
 

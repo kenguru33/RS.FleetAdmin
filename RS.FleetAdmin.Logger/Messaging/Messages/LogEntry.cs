@@ -1,6 +1,9 @@
-﻿namespace RS.FleetAdmin.Logger.Messaging.Messages;
+﻿using MassTransit;
+using RS.FleetAdmin.Shared.Messaging.Logging;
 
-public class LogEntry
+namespace RS.FleetAdmin.Logger.Messaging.Messages;
+
+public class LogEntryCreated : Shared.Messaging.Logging.LogEntryCreated, IConsumer
 {
     
 }
