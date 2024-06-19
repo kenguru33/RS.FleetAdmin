@@ -5,9 +5,9 @@ using RS.FleetAdmin.StationAPI.Entities;
 
 namespace RS.FleetAdmin.StationAPI.DATA;
 
-public class ApplicationDbContext : OutboxDbContext
+public class StationDbContext : OutboxDbContext
 {
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
+    public StationDbContext(DbContextOptions<StationDbContext> options) : base(options) { }
     
     public DbSet<Station> Stations { get; set; }
 

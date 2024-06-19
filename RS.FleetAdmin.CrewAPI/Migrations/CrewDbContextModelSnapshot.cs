@@ -2,21 +2,18 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using RS.FleetAdmin.StationAPI.DATA;
+using RS.FleetAdmin.CrewAPI.Data;
 
 #nullable disable
 
-namespace RS.FleetAdmin.StationAPI.Migrations
+namespace RS.FleetAdmin.CrewAPI.Migrations
 {
-    [DbContext(typeof(StationDbContext))]
-    [Migration("20240617222018_Initial")]
-    partial class Initial
+    [DbContext(typeof(CrewDbContext))]
+    partial class CrewDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -195,7 +192,7 @@ namespace RS.FleetAdmin.StationAPI.Migrations
                     b.ToTable("OutboxState");
                 });
 
-            modelBuilder.Entity("RS.FleetAdmin.StationAPI.Entities.Station", b =>
+            modelBuilder.Entity("RS.FleetAdmin.CrewAPI.Entities.Crew", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()

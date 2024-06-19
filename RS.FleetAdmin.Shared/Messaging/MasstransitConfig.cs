@@ -1,4 +1,5 @@
-﻿using MassTransit;
+﻿using System.Reflection;
+using MassTransit;
 using MassTransit.Configuration;
 using MassTransit.MultiBus;
 using MassTransit.RabbitMqTransport.Configuration;
@@ -12,17 +13,13 @@ namespace RS.FleetAdmin.Shared.Messaging;
 
 public static class MasstransitConfig
 {
-    public static void ConfigureMassTransit<T>(this IServiceCollection services, string queueNamePrefix, string url,
-        string username, string password, params Type[] consumers) where T : DbContext
+    public static IBusRegistrationConfigurator ConfigureMassTransit<T>(this IServiceCollection services,  string rabbitmqConnectionString = "rabbitmq:rabbitmq@localhost") where T : DbContext
     {
+        IBusRegistrationConfigurator busConfigurator = null;
         services.AddMassTransit(x =>
         {
-            foreach (var consumer in consumers)
-            {
-                x.AddConsumer(consumer);
-            }
-            
-            x.SetEndpointNameFormatter(new KebabCaseEndpointNameFormatter(queueNamePrefix + "Endpoint-", false));
+            busConfigurator = x;
+            x.SetEndpointNameFormatter(new KebabCaseEndpointNameFormatter( "Endpoint", false));
             x.AddEntityFrameworkOutbox<T>(o =>
             {
                 o.QueryDelay = TimeSpan.FromSeconds(10);
@@ -32,16 +29,13 @@ public static class MasstransitConfig
             
             x.UsingRabbitMq((context, cfg) =>
             {
-                cfg.Host(url, h =>
-                {
-                    h.Username(username);
-                    h.Password(password);
-                });
-                
+                cfg.Host("rabbitmq://" + rabbitmqConnectionString);
                 cfg.ConfigureEndpoints(context);
             });
-            
         });
+
+        return busConfigurator;
+
     }
     
     public static void ConfigureApplicationDbContext<T>(this IServiceCollection services, string connectionString)
@@ -50,33 +44,4 @@ public static class MasstransitConfig
         services.AddDbContext<T>(options =>
             options.UseNpgsql(connectionString));
     }
-
-    // public static void AddMassTransitWithRabbitMq(this IServiceCollection services, IConfiguration configuration, DbContext dbContext)
-    // {
-    //     services.AddMassTransit(busConfigurator =>
-    //     {
-    //         busConfigurator.AddEntityFrameworkOutbox<typeof(DbContext)>(outboxConfig =>
-    //         {
-    //             outboxConfig.QueryDelay = TimeSpan.FromSeconds(10);
-    //             outboxConfig.UsePostgres();
-    //             outboxConfig.UseBusOutbox();
-    //         });
-    //         // busConfigurator.AddConsumer<StationCreatedHandler>();
-    //         // busConfigurator.AddConsumersFromNamespaceContaining<StationCreatedConsumer>();
-    //         busConfigurator.SetEndpointNameFormatter(new KebabCaseEndpointNameFormatter("station", false));
-    //         busConfigurator.UsingRabbitMq((context, config) =>
-    //         {
-    //             config.Host("localhost", rabbitConfig =>
-    //             {
-    //                 rabbitConfig.Username("rabbitmq");
-    //                 rabbitConfig.Password("rabbitmq");
-    //             });
-    //             config.ReceiveEndpoint("Station", e =>
-    //             {
-    //                 // e.ConfigureConsumer<StationCreatedConsumer>(context);
-    //             });
-    //             config.ConfigureEndpoints(context);
-    //         });
-    //     
-    // }
 }
