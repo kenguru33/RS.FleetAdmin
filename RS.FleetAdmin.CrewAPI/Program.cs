@@ -1,11 +1,8 @@
-using MassTransit;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Web;
-using RS.FleetAdmin.Shared.Messaging;
-using RS.FleetAdmin.StationAPI.DATA;
-using RS.FleetAdmin.StationAPI.Messaging.Consumers;
+using RS.FleetAdmin.CrewAPI.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,10 +15,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.ConfigureApplicationDbContext<StationDbContext>("Server=localhost;Port=5432;Database=StationDB;Username=postgres;Password=postgres");
-
-var x = builder.Services.ConfigureMassTransit<DbContext>();
-x.AddConsumer(typeof(StationCreatedConsumer));
+var configuration = builder.Configuration;
+builder.Services.AddDbContext<CrewDbContext>(options =>
+    options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 

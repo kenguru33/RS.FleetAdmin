@@ -10,7 +10,7 @@ namespace RS.FleetAdmin.StationAPI.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class StationController(ApplicationDbContext dbContext, IPublishEndpoint publishEndpoint) : ControllerBase
+public class StationController(StationDbContext dbContext, IPublishEndpoint publishEndpoint) : ControllerBase
 {
 
     [HttpGet]

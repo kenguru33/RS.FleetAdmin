@@ -11,7 +11,7 @@ using RS.FleetAdmin.StationAPI.DATA;
 
 namespace RS.FleetAdmin.StationAPI.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(StationDbContext))]
     [Migration("20240617224850_init")]
     partial class init
     {

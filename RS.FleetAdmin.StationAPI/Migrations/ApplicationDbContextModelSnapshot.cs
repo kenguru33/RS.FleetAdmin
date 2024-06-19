@@ -10,7 +10,7 @@ using RS.FleetAdmin.StationAPI.DATA;
 
 namespace RS.FleetAdmin.StationAPI.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(StationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
