@@ -13,13 +13,13 @@ namespace RS.FleetAdmin.Shared.Messaging;
 
 public static class MasstransitConfig
 {
-    public static IBusRegistrationConfigurator ConfigureMassTransit<T>(this IServiceCollection services,  string rabbitmqConnectionString = "rabbitmq:rabbitmq@localhost") where T : DbContext
+    public static IBusRegistrationConfigurator ConfigureMassTransit<T>(this IServiceCollection services, string queueName, string rabbitmqConnectionString = "rabbitmq:rabbitmq@localhost") where T : DbContext
     {
         IBusRegistrationConfigurator busConfigurator = null;
         services.AddMassTransit(x =>
         {
             busConfigurator = x;
-            x.SetEndpointNameFormatter(new KebabCaseEndpointNameFormatter( "Endpoint", false));
+            x.SetEndpointNameFormatter(new KebabCaseEndpointNameFormatter( queueName, false));
             x.AddEntityFrameworkOutbox<T>(o =>
             {
                 o.QueryDelay = TimeSpan.FromSeconds(10);

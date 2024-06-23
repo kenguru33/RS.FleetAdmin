@@ -4,12 +4,29 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Web;
 using Microsoft.IdentityModel.Abstractions;
+using RS.FleetAdmin.Logger.Consumers;
 using RS.FleetAdmin.Logger.Data;
-using RS.FleetAdmin.Logger.Messaging.Messages;
+using RS.FleetAdmin.Shared.Messaging;
 using RS.FleetAdmin.Shared.Messaging.Logging;
-using LogEntryCreated = RS.FleetAdmin.Logger.Messaging.Messages.LogEntryCreated;
+using Serilog;
+using Serilog.Events;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddSerilog(options =>
+{
+    options.MinimumLevel.Information()
+        .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
+        .MinimumLevel.Override("System", LogEventLevel.Warning)
+        .WriteTo.Console(restrictedToMinimumLevel: LogEventLevel.Information,
+            outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj}{NewLine}{Exception}")
+        .WriteTo.File("logs/log-.txt",
+            rollOnFileSizeLimit: true,
+            rollingInterval: RollingInterval.Day,
+            fileSizeLimitBytes: 1000000,
+            outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj}{NewLine}{Exception}",
+            restrictedToMinimumLevel: LogEventLevel.Information);
+});
 
 // Add services to the container.
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -24,31 +41,8 @@ var configuration = builder.Configuration;
 builder.Services.AddDbContext<LoggerDbContext>(options =>
     options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddMassTransit(busConfigurator =>
-{
-    busConfigurator.AddEntityFrameworkOutbox<LoggerDbContext>(outboxConfig =>
-    {
-        outboxConfig.QueryDelay = TimeSpan.FromSeconds(30);
-        outboxConfig.UsePostgres();
-        outboxConfig.UseBusOutbox();
-    });
-    // busConfigurator.AddConsumer<StationCreatedConsumer>();
-    busConfigurator.SetEndpointNameFormatter(new KebabCaseEndpointNameFormatter("logger", false));
-    busConfigurator.UsingRabbitMq((context, config) =>
-    {
-        config.Host("localhost", rabbitConfig =>
-        {
-            rabbitConfig.Username("rabbitmq");
-            rabbitConfig.Password("rabbitmq");
-        });
-        config.ReceiveEndpoint("Logger", e =>
-        {
-            e.ConfigureConsumer<LogEntryCreated>(context);
-        });
-        config.ConfigureEndpoints(context);
-    });
-});
-
+var x = builder.Services.ConfigureMassTransit<LoggerDbContext>("logger-api");
+x.AddConsumer(typeof(StationCreatedConsumer));
 
 var app = builder.Build();
 
