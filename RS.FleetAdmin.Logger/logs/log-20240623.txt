@@ -1,0 +1,39 @@
+[00:20:46 INF] Configured endpoint logger-api-station-created, Consumer: RS.FleetAdmin.Logger.Consumers.StationCreatedConsumer
+[00:20:47 INF] Bus started: "rabbitmq://localhost/"
+[00:20:56 INF] Station created: 9579a5c4-70c1-43fe-82a2-82b84ea4e147
+[07:44:51 INF] Bus stopped: "rabbitmq://localhost/"
+[07:44:59 INF] Configured endpoint logger-api-station-created, Consumer: RS.FleetAdmin.Logger.Consumers.StationCreatedConsumer
+[07:44:59 INF] Bus started: "rabbitmq://localhost/"
+[07:45:27 INF] RS.FleetAdmin.Shared.Messaging.Messages.StationCreated
+[07:45:56 INF] Bus stopped: "rabbitmq://localhost/"
+[07:45:59 INF] Configured endpoint logger-api-station-created, Consumer: RS.FleetAdmin.Logger.Consumers.StationCreatedConsumer
+[07:46:00 INF] Bus started: "rabbitmq://localhost/"
+[07:46:15 INF] RS.FleetAdmin.Shared.Messaging.Messages.StationCreated
+[07:47:57 INF] Bus stopped: "rabbitmq://localhost/"
+[07:48:01 INF] Configured endpoint logger-api-station-created, Consumer: RS.FleetAdmin.Logger.Consumers.StationCreatedConsumer
+[07:48:01 INF] Bus started: "rabbitmq://localhost/"
+[07:48:06 INF] RS.FleetAdmin.Shared.Messaging.Messages.StationCreated
+[07:50:43 INF] Station created: 887a3686-2059-41c8-afb6-10ee8b67ac09
+[07:51:19 INF] Station created: RS.FleetAdmin.Shared.Messaging.Messages.StationCreated
+[07:52:01 INF] Station created: RS.FleetAdmin.Shared.Messaging.Messages.StationCreated
+[07:52:12 INF] Bus stopped: "rabbitmq://localhost/"
+[07:52:16 INF] Configured endpoint logger-api-station-created, Consumer: RS.FleetAdmin.Logger.Consumers.StationCreatedConsumer
+[07:52:16 INF] Bus started: "rabbitmq://localhost/"
+[07:52:22 INF] Station created: RS.FleetAdmin.Shared.Messaging.Messages.StationCreated
+[07:54:20 INF] Received message: {"StationId":"cf5d5dce-2985-424f-a101-8479d251a131","Name":"Skjærhalden","$type":"StationCreated"}
+[07:57:00 INF] Received message: {"StationId":"210b9088-804c-43ee-8b62-a709bd358e9f","Name":"Skjærhalden","$type":"StationCreated"}
+[07:57:00 INF] Received message: {"StationId":"cdac8505-dc31-4a8e-8391-2e3d1f220c2a","Name":"Skjærhalden","$type":"StationCreated"}
+[07:57:00 INF] Received message: {"StationId":"67c68f65-ae3d-4eef-afcf-8ea575a9a80f","Name":"Skjærhalden","$type":"StationCreated"}
+[07:57:00 INF] Received message: {"StationId":"7252bb73-6e28-4bfe-8aa8-e6de90de9290","Name":"Skjærhalden","$type":"StationCreated"}
+[07:57:01 INF] Received message: {"StationId":"8f2e0f44-2e3f-443b-b874-f61e0b671c01","Name":"Skjærhalden","$type":"StationCreated"}
+[07:57:01 INF] Received message: {"StationId":"86ac9161-413a-4851-982a-41691fe32677","Name":"Skjærhalden","$type":"StationCreated"}
+[07:57:01 INF] Received message: {"StationId":"5212cf1f-0799-4d94-8f29-72b7d6d9b28a","Name":"Skjærhalden","$type":"StationCreated"}
+[07:57:01 INF] Received message: {"StationId":"22538c34-3d81-40d6-a89e-e3c5abecb674","Name":"Skjærhalden","$type":"StationCreated"}
+[07:57:01 INF] Received message: {"StationId":"f63b2e1a-244a-4a8f-9ffe-3e92de5b2aa2","Name":"Skjærhalden","$type":"StationCreated"}
+[07:57:01 INF] Received message: {"StationId":"26e90b40-ebac-489b-bb9c-6f17a21373f7","Name":"Skjærhalden","$type":"StationCreated"}
+[07:57:02 INF] Received message: {"StationId":"6a638133-2b5f-408c-a6a3-b72ca1fcd867","Name":"Skjærhalden","$type":"StationCreated"}
+[07:57:02 INF] Received message: {"StationId":"b68209fb-69ae-4e57-9512-a81d0019e228","Name":"Skjærhalden","$type":"StationCreated"}
+[07:57:02 INF] Received message: {"StationId":"1abf750b-3947-45a3-92bb-259bf00f413a","Name":"Skjærhalden","$type":"StationCreated"}
+[07:57:02 INF] Received message: {"StationId":"5375cdad-0c9a-4895-b819-1fc196523893","Name":"Skjærhalden","$type":"StationCreated"}
+[07:57:02 INF] Received message: {"StationId":"ba5e8174-0fb9-42b7-b3b9-9ae7241535b1","Name":"Skjærhalden","$type":"StationCreated"}
+[07:57:02 INF] Received message: {"StationId":"99443c1c-425d-4997-8d1b-67f8e53145ef","Name":"Skjærhalden","$type":"StationCreated"}

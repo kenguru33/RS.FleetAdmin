@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"    # RabbitMQ default port
+      - "15672:15672"  # RabbitMQ management plugin default port
+    environment:
+      RABBITMQ_DEFAULT_USER: rabbitmq
+      RABBITMQ_DEFAULT_PASS: rabbitmq
+
+  postgres:
+    image: postgres:13
+    container_name: postgres
+    ports:
+      - "5432:5432"    # PostgreSQL default port
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
