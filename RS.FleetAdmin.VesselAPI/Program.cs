@@ -1,10 +1,13 @@
+using System.Reflection;
 using MassTransit;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Web;
+using RS.FleetAdmin.Shared.Messaging;
+using RS.FleetAdmin.VesselAPI.Commands;
+using RS.FleetAdmin.VesselAPI.Consumers;
 using RS.FleetAdmin.VesselAPI.Data;
-using RS.FleetAdmin.VesselAPI.Messaging.Consumers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,29 +24,11 @@ var configuration = builder.Configuration;
 builder.Services.AddDbContext<VesselDbContext>(options =>
     options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddMassTransit(busConfigurator =>
+var x = builder.Services.ConfigureMassTransit<VesselDbContext>("vessel-api");
+x.AddMediator(mediator =>
 {
-    busConfigurator.AddEntityFrameworkOutbox<VesselDbContext>(outboxConfig =>
-    {
-        outboxConfig.QueryDelay = TimeSpan.FromSeconds(30);
-        outboxConfig.UsePostgres();
-        outboxConfig.UseBusOutbox();
-    });
-    busConfigurator.AddConsumer<StationCreatedConsumer>();
-    busConfigurator.SetEndpointNameFormatter(new KebabCaseEndpointNameFormatter("station", false));
-    busConfigurator.UsingRabbitMq((context, config) =>
-    {
-        config.Host("localhost", rabbitConfig =>
-        {
-            rabbitConfig.Username("rabbitmq");
-            rabbitConfig.Password("rabbitmq");
-        });
-        // config.ReceiveEndpoint("Vessel", e =>
-        // {
-        //     // e.ConfigureConsumer<StationCreatedConsumer>(context);
-        // });
-        config.ConfigureEndpoints(context);
-    });
+   mediator.AddConsumers(Assembly.GetExecutingAssembly());
+   mediator.AddRequestClient<CreateVesselCommand>();
 });
 
 var app = builder.Build();
