@@ -27,9 +27,4 @@
       <ProjectReference Include="..\RS.FleetAdmin.Shared\RS.FleetAdmin.Shared.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Controllers\" />
-      <Folder Include="Messaging\Messages\" />
-    </ItemGroup>
-
 </Project>
