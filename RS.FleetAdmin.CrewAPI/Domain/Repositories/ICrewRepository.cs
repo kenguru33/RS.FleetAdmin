@@ -9,4 +9,6 @@ public interface ICrewRepository
     Task<Crew> CreateCrewAsync(Crew crew);
     Task<Crew> UpdateCrewAsync(Crew crew);
     Task DeleteCrewAsync(Guid crewId);
+
+    Task<bool> SaveChangesAsync();
 }
