@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using RS.FleetAdmin.CrewAPI.Data;
+using RS.FleetAdmin.CrewAPI.Infrastructure.Persistence.Contexts;
 
 #nullable disable
 
