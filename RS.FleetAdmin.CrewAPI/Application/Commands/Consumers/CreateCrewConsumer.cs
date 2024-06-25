@@ -1,6 +1,7 @@
 ﻿using MassTransit;
 using RS.FleetAdmin.CrewAPI.Domain.Entities;
 using RS.FleetAdmin.CrewAPI.Domain.Repositories;
+using RS.FleetAdmin.Shared.Messaging.Messages;
 
 namespace RS.FleetAdmin.CrewAPI.Application.Commands.Consumers;
 
@@ -16,7 +17,12 @@ public class CreateCrewConsumer(ICrewRepository crewRepository) : IConsumer<Crea
             CrewId = Guid.NewGuid(),
             CrewName = command.CrewName
         };
-        await _crewRepository.CreateCrewAsync(crew);
-        
+        var newCrew = await _crewRepository.CreateCrewAsync(crew);
+        await context.Publish<CrewCreated>(new CrewCreated
+        {
+            CrewId = newCrew.CrewId.ToString(),
+            CrewName = newCrew.CrewName
+        });
+        await _crewRepository.SaveChangesAsync();
     }
 }

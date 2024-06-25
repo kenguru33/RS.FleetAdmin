@@ -20,7 +20,8 @@ public class CrewRepository(CrewDbContext context) : ICrewRepository
 
     public async Task<Crew> CreateCrewAsync(Crew crew)
     {
-        throw new NotImplementedException();
+        var newCrew = await _context.Crew.AddAsync(crew);
+        return newCrew.Entity;
     }
 
     public async Task<Crew> UpdateCrewAsync(Crew crew)
@@ -31,5 +32,10 @@ public class CrewRepository(CrewDbContext context) : ICrewRepository
     public async Task DeleteCrewAsync(Guid crewId)
     {
         throw new NotImplementedException();
+    }
+
+    public async Task<bool> SaveChangesAsync()
+    {
+        return await _context.SaveChangesAsync() > 0;
     }
 }

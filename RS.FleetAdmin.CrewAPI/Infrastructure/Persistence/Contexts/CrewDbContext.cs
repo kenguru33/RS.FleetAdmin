@@ -10,5 +10,5 @@ public class CrewDbContext : OutboxDbContext
     {
     }
     
-    public DbSet<Crew> Stations { get; set; }
+    public DbSet<Crew> Crew { get; set; }
 }

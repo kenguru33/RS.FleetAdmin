@@ -8,8 +8,14 @@ namespace RS.FleetAdmin.CrewAPI.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class CrewController(IRequestClient<CreateCrewCommand> createCrewRequestClient) : ControllerBase
+public class CrewController : ControllerBase
 {
+    private readonly IRequestClient<CreateCrewCommand> _createCrewRequestClient;
+
+    public CrewController(IRequestClient<CreateCrewCommand> createCrewRequestClient)
+    {
+        _createCrewRequestClient = createCrewRequestClient;
+    }
     [HttpPost]
     public async Task<IActionResult> CreateCrewAsync(CreateCrewDto dto)
     {
@@ -17,8 +23,8 @@ public class CrewController(IRequestClient<CreateCrewCommand> createCrewRequestC
         {
             CrewName = dto.CrewName
         };
-        var response = await createCrewRequestClient.GetResponse<CrewResponse>(command);
+        var response = await _createCrewRequestClient.GetResponse<CrewResponse>(command);
         
-        return Ok(new { StatusCode = StatusCode(201), Message = "Crew created successfully"});
+        return Ok(response.Message);
     }
 }
