@@ -21,7 +21,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.ConfigureApplicationDbContext<StationDbContext>("Server=localhost;Port=5432;Database=StationDB;Username=postgres;Password=postgres");
 
 var x = builder.Services.ConfigureMassTransit<StationDbContext>("station-api");
-x.AddConsumer(typeof(StationCreatedConsumer));
+x.AddConsumersFromNamespaceContaining(typeof(StationCreatedConsumer));
 
 var app = builder.Build();
 

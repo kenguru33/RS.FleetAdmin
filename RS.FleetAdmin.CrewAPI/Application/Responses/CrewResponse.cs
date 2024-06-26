@@ -2,6 +2,6 @@
 
 public class CrewResponse
 {
-    string CrewId { get; set; }
-    string CrewName { get; set; }
+    public string CrewId { get; set; }
+    public string CrewName { get; set; }
 }
