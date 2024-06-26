@@ -1,7 +1,9 @@
 ﻿using MassTransit;
+using MassTransit.Mediator;
 using Microsoft.AspNetCore.Mvc;
 using RS.FleetAdmin.CrewAPI.API.DTOs;
 using RS.FleetAdmin.CrewAPI.Application.Commands;
+using RS.FleetAdmin.CrewAPI.Application.Handlers;
 using RS.FleetAdmin.CrewAPI.Application.Responses;
 
 namespace RS.FleetAdmin.CrewAPI.API.Controllers;
@@ -11,6 +13,7 @@ namespace RS.FleetAdmin.CrewAPI.API.Controllers;
 public class CrewController : ControllerBase
 {
     private readonly IRequestClient<CreateCrewCommand> _createCrewRequestClient;
+    private readonly IMediator _mediator;
 
     public CrewController(IRequestClient<CreateCrewCommand> createCrewRequestClient)
     {
@@ -23,8 +26,8 @@ public class CrewController : ControllerBase
         {
             CrewName = dto.CrewName
         };
-        var response = await _createCrewRequestClient.GetResponse<CrewResponse>(command);
         
+        var response = await _createCrewRequestClient.GetResponse<CrewResponse>(command);
         return Ok(response.Message);
     }
 }

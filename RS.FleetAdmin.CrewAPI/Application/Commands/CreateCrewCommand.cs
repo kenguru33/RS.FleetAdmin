@@ -1,4 +1,4 @@
-﻿namespace RS.FleetAdmin.CrewAPI.Application.Commands;
+﻿namespace RS.FleetAdmin.CrewAPI.Application.Handlers;
 
 public class CreateCrewCommand
 {
