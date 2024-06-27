@@ -12,7 +12,7 @@ services:
       RABBITMQ_DEFAULT_PASS: rabbitmq
 
   postgres:
-    image: postgres:13
+    image: postgres
     container_name: postgres
     ports:
       - "5432:5432"    # PostgreSQL default port
