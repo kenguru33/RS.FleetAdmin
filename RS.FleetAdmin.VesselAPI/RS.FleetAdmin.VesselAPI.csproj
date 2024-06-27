@@ -8,9 +8,11 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="AutoMapper" Version="13.0.1" />
         <PackageReference Include="MassTransit.AspNetCore" Version="7.3.1" />
         <PackageReference Include="MassTransit.EntityFrameworkCore" Version="8.2.2" />
         <PackageReference Include="Masstransit.RabbitMQ" Version="8.2.2" />
+        <PackageReference Include="MediatR" Version="12.3.0" />
         <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.6" NoWarn="NU1605" />
         <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="8.0.6" NoWarn="NU1605" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.6">

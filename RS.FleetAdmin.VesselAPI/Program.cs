@@ -5,9 +5,10 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Web;
 using RS.FleetAdmin.Shared.Messaging;
-using RS.FleetAdmin.VesselAPI.Commands;
-using RS.FleetAdmin.VesselAPI.Consumers;
+using RS.FleetAdmin.Shared.Tools;
+using RS.FleetAdmin.VesselAPI.Core.Repositories;
 using RS.FleetAdmin.VesselAPI.Data;
+using RS.FleetAdmin.VesselAPI.Data.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,12 +25,16 @@ var configuration = builder.Configuration;
 builder.Services.AddDbContext<VesselDbContext>(options =>
     options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
 
+// Register VesselMappingProfile
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
+// Register VesselRepository
+builder.Services.AddScoped<IVesselRepository, VesselRepository>();
+
+// Register MediatR
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+
 var x = builder.Services.ConfigureMassTransit<VesselDbContext>("vessel-api");
-x.AddMediator(mediator =>
-{
-   mediator.AddConsumers(Assembly.GetExecutingAssembly());
-   mediator.AddRequestClient<CreateVesselCommand>();
-});
 
 var app = builder.Build();
 
@@ -45,5 +50,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+DbHelpers.ApplyPendingMigrations<VesselDbContext>(app.Services);
 
 app.Run();
