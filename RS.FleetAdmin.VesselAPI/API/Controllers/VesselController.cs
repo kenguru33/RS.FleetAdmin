@@ -2,7 +2,8 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using RS.FleetAdmin.VesselAPI.API.DTOs;
-using RS.FleetAdmin.VesselAPI.Core.Commands;
+using RS.FleetAdmin.VesselAPI.Core.Application.Commands;
+using RS.FleetAdmin.VesselAPI.Core.Application.Queries;
 
 namespace RS.FleetAdmin.VesselAPI.API.Controllers;
 
@@ -24,7 +25,15 @@ public class VesselController : ControllerBase
     public async Task<IActionResult> CreateVessel([FromBody] CreateVesselDto dto)
     {
         var result = await _mediator.Send(_mapper.Map<CreateVesselCommand>(dto));
-        return Ok(result);
+        var actionResult = CreatedAtAction(nameof(GetVesselById), new { vesselId = result.VesselId }, result);
+        return actionResult;
+    }
+    
+    [HttpGet("{vesselId}")]
+    public async Task<IActionResult> GetVesselById(string vesselId)
+    {
+        var result = await _mediator.Send(new GetVesselByIdQuery(vesselId));
+        return Ok(_mapper.Map<VesselResponseDto>(result));
     }
 }
 

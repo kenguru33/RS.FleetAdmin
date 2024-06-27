@@ -29,4 +29,9 @@
       <ProjectReference Include="..\RS.FleetAdmin.Shared\RS.FleetAdmin.Shared.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Core\Application\" />
+      <Folder Include="Core\Domain\" />
+    </ItemGroup>
+
 </Project>

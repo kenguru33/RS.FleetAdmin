@@ -12,8 +12,8 @@ using RS.FleetAdmin.VesselAPI.Infrastructure.Persistence;
 namespace RS.FleetAdmin.VesselAPI.Migrations
 {
     [DbContext(typeof(VesselDbContext))]
-    [Migration("20240626224608_renamed VesselId to Id")]
-    partial class renamedVesselIdtoId
+    [Migration("20240616220505_Vessel_and_Outbox")]
+    partial class Vessel_and_Outbox
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -197,7 +197,7 @@ namespace RS.FleetAdmin.VesselAPI.Migrations
 
             modelBuilder.Entity("RS.FleetAdmin.VesselAPI.Entities.Vessel", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("VesselId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
@@ -205,7 +205,7 @@ namespace RS.FleetAdmin.VesselAPI.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.HasKey("Id");
+                    b.HasKey("VesselId");
 
                     b.ToTable("Vessels");
                 });
