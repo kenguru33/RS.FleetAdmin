@@ -2,7 +2,6 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using RS.FleetAdmin.VesselAPI.Infrastructure.Persistence;
@@ -12,11 +11,9 @@ using RS.FleetAdmin.VesselAPI.Infrastructure.Persistence;
 namespace RS.FleetAdmin.VesselAPI.Migrations
 {
     [DbContext(typeof(VesselDbContext))]
-    [Migration("20240626224608_renamed VesselId to Id")]
-    partial class renamedVesselIdtoId
+    partial class VesselDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
