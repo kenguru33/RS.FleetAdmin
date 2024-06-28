@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RS.FleetAdmin.Logger.Entities;
 using RS.FleetAdmin.Shared.Infrastructure;
-using RS.FleetAdmin.Shared.Messaging;
 
 namespace RS.FleetAdmin.Logger.Data;
 

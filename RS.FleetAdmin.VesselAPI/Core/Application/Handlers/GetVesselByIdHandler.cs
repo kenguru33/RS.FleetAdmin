@@ -7,9 +7,9 @@ namespace RS.FleetAdmin.VesselAPI.Core.Application.Handlers;
 
 public class GetVesselByIdHandler(IVesselService vesselService) : IRequestHandler<GetVesselByIdQuery, VesselResponse>
 {
-    public async Task<VesselResponse> Handle(GetVesselByIdQuery request, CancellationToken cancellationToken)
+    public async Task<VesselResponse> Handle(GetVesselByIdQuery query, CancellationToken cancellationToken)
     {
-        var vessel = await vesselService.GetVesselById(request.VesselId, cancellationToken);
+        var vessel = await vesselService.GetVesselById(query, cancellationToken);
         return vessel;
     }
 }

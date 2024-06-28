@@ -1,4 +1,4 @@
-namespace RS.FleetAdmin.Shared.Messaging.Messages;
+namespace RS.FleetAdmin.Shared.Messages;
 
 public class StationDeleted
 {

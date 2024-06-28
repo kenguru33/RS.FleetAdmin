@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Web;
 using RS.FleetAdmin.Shared.Infrastructure;
-using RS.FleetAdmin.Shared.Messaging;
 using RS.FleetAdmin.Shared.Tools;
 using RS.FleetAdmin.StationAPI.DATA;
 using RS.FleetAdmin.StationAPI.Messaging.Consumers;

@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RS.FleetAdmin.Shared;
-using RS.FleetAdmin.Shared.Messaging.Messages;
+using RS.FleetAdmin.Shared.Messages;
 using RS.FleetAdmin.StationAPI.DATA;
 using RS.FleetAdmin.StationAPI.Dtos;
 using RS.FleetAdmin.StationAPI.Entities;

@@ -1,4 +1,4 @@
-﻿namespace RS.FleetAdmin.Shared.Messaging.Logging;
+﻿namespace RS.FleetAdmin.Shared.Messages;
 
 public class LogEntryCreated
 {

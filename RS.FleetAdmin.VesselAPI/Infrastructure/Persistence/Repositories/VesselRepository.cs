@@ -28,14 +28,14 @@ public class VesselRepository : IVesselRepository
         throw new NotImplementedException();
     }
 
-    public Task<bool> DeleteVesselAsync(string id)
+    public Task<bool> DeleteVesselAsync(Guid id)
     {
         throw new NotImplementedException();
     }
     
-    public async Task<Vessel> GetVesselByIdAsync(string id)
+    public async Task<Vessel> GetVesselByIdAsync(Guid id)
     {
-        var vessel = await _context.Vessels.FirstOrDefaultAsync(v => v.Id.ToString() == id);
+        var vessel = await _context.Vessels.FirstOrDefaultAsync(v => v.Id == id);
         if (vessel is null) throw new Exception("Not found");
         return vessel;
     }

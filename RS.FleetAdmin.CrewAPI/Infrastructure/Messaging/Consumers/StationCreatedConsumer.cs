@@ -1,5 +1,5 @@
 ﻿using MassTransit;
-using RS.FleetAdmin.Shared.Messaging.Messages;
+using RS.FleetAdmin.Shared.Messages;
 
 namespace RS.FleetAdmin.CrewAPI.Infrastructure.Messaging.Consumers;
 

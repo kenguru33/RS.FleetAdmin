@@ -12,7 +12,6 @@ using RS.FleetAdmin.CrewAPI.Infrastructure.Messaging.Consumers;
 using RS.FleetAdmin.CrewAPI.Infrastructure.Persistence.Contexts;
 using RS.FleetAdmin.CrewAPI.Infrastructure.Persistence.Repositories;
 using RS.FleetAdmin.Shared.Infrastructure;
-using RS.FleetAdmin.Shared.Messaging;
 using RS.FleetAdmin.Shared.Tools;
 
 var builder = WebApplication.CreateBuilder(args);

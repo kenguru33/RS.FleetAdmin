@@ -1,11 +1,11 @@
 ﻿using MassTransit;
-using RS.FleetAdmin.Shared.Messaging.Messages;
+using RS.FleetAdmin.Shared.Messages;
 
 namespace RS.FleetAdmin.CrewAPI.Infrastructure.Messaging.Consumers;
 
-public class VesselCreatedConsumer : IConsumer<VesseLCreated>
+public class VesselCreatedConsumer : IConsumer<VesselCreated>
 {
-    public Task Consume(ConsumeContext<VesseLCreated> context)
+    public Task Consume(ConsumeContext<VesselCreated> context)
     {
         Console.WriteLine("Vessel created");
         return Task.CompletedTask;

@@ -3,7 +3,7 @@ using RS.FleetAdmin.CrewAPI.Application.Handlers;
 using RS.FleetAdmin.CrewAPI.Application.Responses;
 using RS.FleetAdmin.CrewAPI.Domain.Entities;
 using RS.FleetAdmin.CrewAPI.Domain.Repositories;
-using RS.FleetAdmin.Shared.Messaging.Messages;
+using RS.FleetAdmin.Shared.Messages;
 
 namespace RS.FleetAdmin.CrewAPI.Application.Commands.Consumers;
 

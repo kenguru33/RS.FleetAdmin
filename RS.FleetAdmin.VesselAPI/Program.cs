@@ -1,4 +1,5 @@
 using System.Reflection;
+using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Web;
@@ -6,6 +7,7 @@ using RS.FleetAdmin.Shared.Infrastructure;
 using RS.FleetAdmin.Shared.Tools;
 using RS.FleetAdmin.VesselAPI.Core.Application.Services;
 using RS.FleetAdmin.VesselAPI.Core.Domain.Repositories;
+using RS.FleetAdmin.VesselAPI.Infrastructure.Messaging.Consumers;
 using RS.FleetAdmin.VesselAPI.Infrastructure.Messaging.Services;
 using RS.FleetAdmin.VesselAPI.Infrastructure.Persistence;
 using RS.FleetAdmin.VesselAPI.Infrastructure.Persistence.Repositories;
@@ -47,7 +49,7 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.Get
 var x = builder.Services.ConfigureMassTransit<VesselDbContext>("vessel-api");
 
 // Register MassTransit consumers
-x.AddConsumer<StationCreatedConsumer>();
+x.AddConsumersFromNamespaceContaining<StationCreatedConsumer>();
 
 var app = builder.Build();
 

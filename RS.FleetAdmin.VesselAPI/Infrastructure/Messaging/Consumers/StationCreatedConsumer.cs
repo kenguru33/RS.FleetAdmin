@@ -1,7 +1,7 @@
 using MassTransit;
-using RS.FleetAdmin.Shared.Messaging.Messages;
+using RS.FleetAdmin.Shared.Messages;
 
-namespace RS.FleetAdmin.VesselAPI.Infrastructure.Messaging.Services;
+namespace RS.FleetAdmin.VesselAPI.Infrastructure.Messaging.Consumers;
 
 public class StationCreatedConsumer : IConsumer<StationCreated>
 {

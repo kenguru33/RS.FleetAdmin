@@ -7,8 +7,6 @@ using Microsoft.IdentityModel.Abstractions;
 using RS.FleetAdmin.Logger.Consumers;
 using RS.FleetAdmin.Logger.Data;
 using RS.FleetAdmin.Shared.Infrastructure;
-using RS.FleetAdmin.Shared.Messaging;
-using RS.FleetAdmin.Shared.Messaging.Logging;
 using Serilog;
 using Serilog.Events;
 

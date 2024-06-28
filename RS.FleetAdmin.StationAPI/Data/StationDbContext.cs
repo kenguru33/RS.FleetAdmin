@@ -1,7 +1,6 @@
 ﻿using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using RS.FleetAdmin.Shared.Infrastructure;
-using RS.FleetAdmin.Shared.Messaging;
 using RS.FleetAdmin.StationAPI.Entities;
 
 namespace RS.FleetAdmin.StationAPI.DATA;

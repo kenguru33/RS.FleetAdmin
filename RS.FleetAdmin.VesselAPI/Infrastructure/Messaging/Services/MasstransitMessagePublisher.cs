@@ -1,4 +1,5 @@
 using MassTransit;
+using RS.FleetAdmin.VesselAPI.Core.Application.Services;
 
 namespace RS.FleetAdmin.VesselAPI.Infrastructure.Messaging.Services;
 

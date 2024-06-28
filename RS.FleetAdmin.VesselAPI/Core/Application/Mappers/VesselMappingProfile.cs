@@ -1,5 +1,5 @@
 using AutoMapper;
-using RS.FleetAdmin.Shared.Messaging.Messages;
+using RS.FleetAdmin.Shared.Messages;
 using RS.FleetAdmin.VesselAPI.Core.Application.Commands;
 using RS.FleetAdmin.VesselAPI.Core.Application.Responses;
 using RS.FleetAdmin.VesselAPI.Core.Domain.Entities;
@@ -11,12 +11,14 @@ public class VesselMappingProfile : Profile
     public VesselMappingProfile()
     {
         CreateMap<CreateVesselCommand, Vessel>()
-            .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.VesselId))
+            .ForMember(dest => dest.Id, opt => opt.MapFrom(src => Guid.NewGuid()))
             .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.VesselName));
         CreateMap<Vessel, VesselResponse>()
-            .ForMember(dest => dest.VesselId, opt => opt.MapFrom(src => src.Id.ToString()))
+            .ForMember(dest => dest.VesselId, opt => opt.MapFrom(src => src.Id))
             .ForMember(dest => dest.VesselName, opt => opt.MapFrom(src => src.Name));
-        CreateMap<Vessel, VesseLCreated>()
-            .ForMember(dest => dest.VesselId, opt => opt.MapFrom(src => src.Id));
+        CreateMap<Vessel, VesselCreated>()
+            .ForMember(dest => dest.VesselId, opt => opt.MapFrom(src => src.Id))
+            .ForMember(dest => dest.VesselName, opt => opt.MapFrom(src => src.Name));
+
     }
 }

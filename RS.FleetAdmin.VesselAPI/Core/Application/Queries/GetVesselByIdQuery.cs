@@ -5,10 +5,5 @@ namespace RS.FleetAdmin.VesselAPI.Core.Application.Queries;
 
 public class GetVesselByIdQuery : IRequest<VesselResponse>
 {
-    public string VesselId { get; set; }
-    
-    public GetVesselByIdQuery(string vesselId)
-    {
-        VesselId = vesselId;
-    }
+    public Guid VesselId { get; set; }
 }

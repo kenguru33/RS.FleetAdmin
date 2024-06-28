@@ -1,7 +1,11 @@
-﻿namespace RS.FleetAdmin.VesselAPI.Core.Domain.Entities;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace RS.FleetAdmin.VesselAPI.Core.Domain.Entities;
 
 public class Vessel
 {
-    public Guid Id { get; set; }
-    public string Name { get; set; }
+    [Key]
+    public Guid Id { get; init; }
+
+    [Required, MaxLength(100)] public string Name { get; init; } = string.Empty;
 }
