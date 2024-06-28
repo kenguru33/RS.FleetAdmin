@@ -12,30 +12,32 @@ public class VesselRepository : IVesselRepository
     {
         _context = context;
     }
-    public async Task<IEnumerable<Vessel>> GetVesselsAsync()
+    public Task<IEnumerable<Vessel>> GetVesselsAsync()
     {
         throw new NotImplementedException();
     }
 
-    public async Task<Vessel> AddVesselAsync(Vessel vessel)
+    public Task<Vessel> AddVesselAsync(Vessel vessel)
     {
         var newVessel = _context.Vessels.Add(vessel);
-        return newVessel.Entity;
+        return Task.FromResult(newVessel.Entity);
     }
 
-    public async Task<Vessel> UpdateVesselAsync(Vessel vessel)
+    public Task<Vessel> UpdateVesselAsync(Vessel vessel)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<bool> DeleteVesselAsync(string id)
+    public Task<bool> DeleteVesselAsync(string id)
     {
         throw new NotImplementedException();
     }
     
     public async Task<Vessel> GetVesselByIdAsync(string id)
     {
-        return await _context.Vessels.FirstOrDefaultAsync(v => v.Id.ToString() == id);
+        var vessel = await _context.Vessels.FirstOrDefaultAsync(v => v.Id.ToString() == id);
+        if (vessel is null) throw new Exception("Not found");
+        return vessel;
     }
 
     public async Task<bool> SaveChangesAsync()

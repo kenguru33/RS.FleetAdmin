@@ -1,4 +1,4 @@
-﻿namespace RS.FleetAdmin.StationAPI.Controllers;
+﻿namespace RS.FleetAdmin.StationAPI.Dtos;
 
 public class StationsResponseDto
 {
