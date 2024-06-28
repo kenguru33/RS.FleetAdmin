@@ -3,7 +3,7 @@ using RS.FleetAdmin.Shared.Messaging.Messages;
 
 namespace RS.FleetAdmin.VesselAPI.Infrastructure.Messaging.Services;
 
-public class StationCreatedConsuumer : IConsumer<StationCreated>
+public class StationCreatedConsumer : IConsumer<StationCreated>
 {
     public Task Consume(ConsumeContext<StationCreated> context)
     {
