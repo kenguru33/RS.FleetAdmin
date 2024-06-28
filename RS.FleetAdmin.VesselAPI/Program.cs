@@ -16,6 +16,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"));
 
+// Configure Serilog
+builder.Services.ConfigureSerilog();
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -44,7 +47,7 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.Get
 var x = builder.Services.ConfigureMassTransit<VesselDbContext>("vessel-api");
 
 // Register MassTransit consumers
-x.AddConsumer<StationCreatedConsuumer>();
+x.AddConsumer<StationCreatedConsumer>();
 
 var app = builder.Build();
 
