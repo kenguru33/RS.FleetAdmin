@@ -22,9 +22,9 @@ public class CreateVesselConsumer(IDocumentStore store, IPublishEndpoint publish
         };
         
         // check if stream exists
-        var stream = await session.Events.FetchStreamAsync(vesselCreated.VesselId);
+        var stream = await session.Events.FetchStreamStateAsync(vesselCreated.VesselId);
         
-        if (stream.Any())
+        if (stream is null)
         {
             session.Events.StartStream(vesselCreated.VesselId, vesselCreated);
         }

@@ -10,6 +10,8 @@ using Weasel.Core;
 var builder = Host.CreateApplicationBuilder(args);
 builder.Services.AddHostedService<Worker>();
 
+builder.Services.ConfigureSerilog();
+
 builder.Services.AddMarten(options =>
 {
     // Establish the connection string to your Marten database

@@ -28,7 +28,7 @@ builder.Services.AddSwaggerGen();
 
 var configuration = builder.Configuration;
 builder.Services.AddDbContext<VesselDbContext>(options =>
-    options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
+    options.UseNpgsql(configuration.GetConnectionString("VesselDB")));
 
 // Register MappingProfile
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
