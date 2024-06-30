@@ -13,8 +13,8 @@ public static class SerilogConfig
             if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
             {
                 options.MinimumLevel.Debug()
-                    .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
-                    .MinimumLevel.Override("System", LogEventLevel.Information)
+                    .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
+                    .MinimumLevel.Override("System", LogEventLevel.Warning)
                     .WriteTo.Console(restrictedToMinimumLevel: LogEventLevel.Debug,
                         outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj}{NewLine}{Exception}");
             }

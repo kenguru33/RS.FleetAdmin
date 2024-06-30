@@ -8,17 +8,24 @@ public static class MasstransitConfig
 {
     public static IBusRegistrationConfigurator ConfigureMassTransit<T>(this IServiceCollection services, string queueName, string rabbitmqConnectionString = "rabbitmq:rabbitmq@localhost") where T : DbContext
     {
+        var busConfigurator = ConfigureMassTransit(services, queueName, rabbitmqConnectionString);
+        busConfigurator.AddEntityFrameworkOutbox<T>(o =>
+        {
+            o.QueryDelay = TimeSpan.FromSeconds(10);
+            o.UsePostgres();
+            o.UseBusOutbox();
+        });
+
+        return busConfigurator;
+    }
+    
+    public static IBusRegistrationConfigurator ConfigureMassTransit(this IServiceCollection services, string queueName, string rabbitmqConnectionString = "rabbitmq:rabbitmq@localhost")
+    {
         IBusRegistrationConfigurator busConfigurator = null;
         services.AddMassTransit(x =>
         {
             busConfigurator = x;
             x.SetEndpointNameFormatter(new KebabCaseEndpointNameFormatter( queueName, false));
-            x.AddEntityFrameworkOutbox<T>(o =>
-            {
-                o.QueryDelay = TimeSpan.FromSeconds(10);
-                o.UsePostgres();
-                o.UseBusOutbox();
-            });
             
             x.UsingRabbitMq((context, cfg) =>
             {

@@ -15,7 +15,7 @@ public class VesselCreatedConsumer : IConsumer<VesselCreated>
     public Task Consume(ConsumeContext<VesselCreated> context)
     {
         // It should be created here - event sourcing
-        Console.WriteLine("Create vessel here");
+        Console.WriteLine("VESSEL-SERVICE: Create vessel here from event");
         return Task.CompletedTask;
     }
 }
