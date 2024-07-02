@@ -21,6 +21,9 @@ public class VesselService(IVesselRepository vesselRepository, IMessagePublisher
         if (!await vesselRepository.SaveChangesAsync())
             throw new Exception("Failed to save changes to the database");
         return mapper.Map<VesselResponse>(vessel);
+        
+        
+        
     }
 
     public async Task<VesselResponse> GetVesselById(GetVesselByIdQuery query, CancellationToken cancellationToken)

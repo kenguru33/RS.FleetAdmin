@@ -32,7 +32,7 @@ public class VesselController : ControllerBase
             VesselName = command.VesselName
         };
         
-        var sendToUri = new Uri("rabbitmq://localhost/event-source-service-create-vessel");
+        var sendToUri = new Uri("rabbitmq://localhost/event-source-service-masstransit-create-vessel-command");
         var endpoint = await _bus.GetSendEndpoint(sendToUri);
         await endpoint.Send(createVessel);
         return Ok();
