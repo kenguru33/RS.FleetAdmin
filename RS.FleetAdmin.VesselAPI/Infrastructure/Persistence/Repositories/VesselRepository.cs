@@ -12,9 +12,10 @@ public class VesselRepository : IVesselRepository
     {
         _context = context;
     }
-    public Task<IEnumerable<Vessel>> GetVesselsAsync()
+    public Task<List<Vessel>> GetVesselsAsync()
     {
-        throw new NotImplementedException();
+        var vessels = _context.Vessels.ToListAsync();
+        return vessels;
     }
 
     public Task<Vessel> AddVesselAsync(Vessel vessel)

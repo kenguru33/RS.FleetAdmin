@@ -35,6 +35,13 @@ public class VesselController : ControllerBase
         var result = await _mediator.Send(query);
         return Ok(result);
     }
+
+    [HttpGet()]
+    public async Task<IActionResult> GetVessels()
+    {
+        var vessels = await _mediator.Send(new GetVesselsQuery());
+        return Ok(vessels);
+    }
 }
 
 

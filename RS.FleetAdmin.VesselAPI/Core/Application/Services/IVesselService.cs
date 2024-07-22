@@ -9,4 +9,6 @@ public interface IVesselService
     public Task<VesselResponse> CreateVessel(CreateVesselCommand command, CancellationToken cancellationToken);
     
     Task<VesselResponse> GetVesselById(GetVesselByIdQuery query, CancellationToken cancellationToken);
+
+    Task<List<VesselResponse>> GetVessels();
 }

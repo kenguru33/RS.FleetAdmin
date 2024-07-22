@@ -4,7 +4,7 @@ namespace RS.FleetAdmin.VesselAPI.Core.Domain.Repositories;
 
 public interface IVesselRepository
 {
-    public Task<IEnumerable<Vessel>> GetVesselsAsync();
+    public Task<List<Vessel>> GetVesselsAsync();
     public Task<Vessel> AddVesselAsync(Vessel vessel);
     public Task<Vessel> UpdateVesselAsync(Vessel vessel);
     public Task<bool> DeleteVesselAsync(Guid id);

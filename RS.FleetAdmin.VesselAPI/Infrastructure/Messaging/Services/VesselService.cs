@@ -28,4 +28,10 @@ public class VesselService(IVesselRepository vesselRepository, IMessagePublisher
         var vessel = await vesselRepository.GetVesselByIdAsync(query.VesselId);
         return mapper.Map<VesselResponse>(vessel);
     }
+
+    public async Task<List<VesselResponse>> GetVessels()
+    {
+        var vessels = await vesselRepository.GetVesselsAsync();
+        return mapper.Map<List<VesselResponse>>(vessels);
+    }
 }
